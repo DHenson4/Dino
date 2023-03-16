@@ -1,24 +1,30 @@
-var character = document.getElementById("character");
-var block = document.getElementById("block");
+const dino = document.getElementById("dino");
+const cactus = document.getElementById("cactus");
 
 function jump() {
-    if(character.classList != "animate") {
-        character.classList.add("animate");
+    if (dino.clasList !="jump") {
+        dino.classList.add("jump");
+
+        setTimeout(function () {
+            dino.classList.remove("jump");
+        }, 300);
     }
-    
-    setTimeout(function(){
-        character.classList.remove("animate");
-    },500);
 }
 
-var checkDead = setInterval(function() {
-    var characterTop =
-    parseInt(window.getComputedStyle(character).getPropertyValue("top"));
-    var blockLeft =
-    parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-    if(blockLeft<20 && blockLeft>0 && characterTop>=130) {
-        block.style.animation = "none";
-        block.style.display = "none";
-        alert("You Lose.");
-    }
-},10);
+let isAlive = setInterval(function () {
+    let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+
+    let cactusLeft = parseInt(
+        window.getComputedStyle(cactus).getPropertyValue("left")
+    );
+
+    if (cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140) {
+        alert("Game Over!");
+    }        
+}, 10);
+
+document.addEventListener("keydown", function (event) {
+    jump();
+});
+
+
